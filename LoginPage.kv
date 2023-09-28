@@ -1,0 +1,41 @@
+ErrorScreen
+
+<Question1Screen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: "What?"
+        BoxLayout:
+            orientation: 'horizontal'
+            Button:
+                text: 'that'
+                background_color: 200,0,0,1
+            Button:
+                text: 'this'
+                background_color: 0,200,0,1
+            Button:
+                text: 'nothing'
+                background_color: 0,0,200,1
+
+
+<CorrectScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            size_hint: 1, 2
+            text: 'good job.'
+        Button:
+            background_color: .1,.4,.7,1
+            text: 'next questoin please'
+
+<ErrorScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            size_hint: 1, 2
+            text: 'you suck bad job.'
+        Button:
+            background_color: .3,.5,.2,1
+            text: 'next questoin please'
+
+
