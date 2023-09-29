@@ -1,4 +1,13 @@
-ErrorScreen
+<QuizManager>:
+    Question1Screen:
+        name: 'question1'
+    CorrectScreen:
+        name: 'correct'
+    ErrorScreen:
+        name: 'wrong'
+    Question2Screen:
+        name: 'question2'
+
 
 <Question1Screen>:
     BoxLayout:
@@ -9,13 +18,36 @@ ErrorScreen
             orientation: 'horizontal'
             Button:
                 text: 'that'
-                background_color: 200,0,0,1
+                background_color: 1,0,0
+                on_release: root.answer_question(False)
             Button:
                 text: 'this'
-                background_color: 0,200,0,1
+                background_color: 0,1,0
+                on_release: root.answer_question(False)
+
+
             Button:
-                text: 'nothing'
-                background_color: 0,0,200,1
+                background_normal: '280.jpg'
+                background_down: '280.jpg'
+                on_release: root.answer_question(True)
+
+
+
+
+<Question2Screen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: 'complete the following message: spacetime tells mass how to move, and mass tells spacetime how to ___'
+            size_hint: 1, 7
+        TextInput:
+            id: curve
+            hint_text: 'enter remaining word'
+        Button:
+            text: 'press enter'
+            on_release: root.answer_question(curve.text)
+
+
 
 
 <CorrectScreen>:
@@ -24,9 +56,18 @@ ErrorScreen
         Label:
             size_hint: 1, 2
             text: 'good job.'
+            background_color: (80/255,1,60/255,1)
+            canvas.before:
+                Color:
+                    rgba: self.background_color
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+
         Button:
             background_color: .1,.4,.7,1
             text: 'next questoin please'
+            on_release: root.next_question()
 
 <ErrorScreen>:
     BoxLayout:
@@ -34,8 +75,18 @@ ErrorScreen
         Label:
             size_hint: 1, 2
             text: 'you suck bad job.'
+            background_color: (1,.2,.3,1)
+            canvas.before:
+                Color:
+                    rgba: self.background_color
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+
         Button:
             background_color: .3,.5,.2,1
             text: 'next questoin please'
+            on_release: root.next_question()
+
 
 
