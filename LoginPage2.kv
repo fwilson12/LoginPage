@@ -1,0 +1,70 @@
+<LoginManager>:
+    LoginScreen:
+        name: 'login'
+    RegisterScreen:
+        name: 'register'
+    LogoutScreen:
+        name: 'logout'
+
+
+<LoginScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            id: invalid_credentials
+            text: ''
+        BoxLayout:
+            orientation: 'horizontal'
+            Label:
+                text: 'username'
+            TextInput:
+                id: user
+        BoxLayout:
+            orientation: 'horizontal'
+            Label:
+                text: 'password'
+            TextInput:
+                id: password
+        Button:
+            text: 'log me in now!'
+            on_release: root.login(user.text, password.text)
+
+
+<LogoutScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: 'Successfully Logged in'
+        Button:
+            text: 'log out'
+            on_release: root.logout()
+
+
+
+<RegisterScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            id: password_problem
+        BoxLayout:
+            orientation: 'horizontal'
+            Label:
+                text: 'New Username'
+            TextInput:
+                id: newuser
+        BoxLayout:
+            orientation: 'horizontal'
+            Label:
+                text: 'New Password'
+            TextInput:
+                id: newpassword1
+        BoxLayout:
+            orientation: 'horizontal'
+            Label:
+                text: 'Confirm New Password'
+            TextInput:
+                id: newpassword2
+
+
+
+
