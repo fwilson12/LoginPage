@@ -28,6 +28,9 @@
         Button:
             text: 'log me in now!'
             on_release: root.login(user.text, password.text)
+        Button:
+            text: 'register a new account!'
+            on_release: root.register()
 
 
 <LogoutScreen>:
@@ -45,7 +48,9 @@
     BoxLayout:
         orientation: 'vertical'
         Label:
-            id: password_problem
+            id: problem
+            text: ''
+            color: 'red'
         BoxLayout:
             orientation: 'horizontal'
             Label:
@@ -64,6 +69,12 @@
                 text: 'Confirm New Password'
             TextInput:
                 id: newpassword2
+        Button:
+            text: 'register'
+            on_release: root.register(newuser.text,newpassword1.text,newpassword2.text)
+        Button:
+            text: 'back to login page'
+            on_release: root.gologin()
 
 
 

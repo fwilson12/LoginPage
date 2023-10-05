@@ -5,6 +5,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 Builder.load_file("LoginPage.kv")
 Builder.load_file("LoginPage2.kv")
 
+
 # class QuizPageApp(App):
 #     def build(self):
 #         return QuizManager()
@@ -49,21 +50,74 @@ class LoginPage2App(App):
 class LoginManager(ScreenManager):
     pass
 
+
 class LoginScreen(Screen):
     def login(self, user, password):
         if user in users.keys() and password in users.values():
             self.manager.current = 'logout'
         else:
             self.ids.invalid_credentials.text = 'register a new account'
-            self.ids.invalid_credentials.color = 'blue'
+            self.ids.invalid_credentials.color = 'red'
+
+    def register(self):
+        self.manager.current = 'register'
 
 
 class RegisterScreen(Screen):
-    pass
+    def register(self, newuser, newpass, newpass2):
+        newuser = str(newuser)
+        newpass = str(newpass)
+        newpass2 = str(newpass2)
+        lowers = 'abcdefghijklmnopqrstuvwxyz'
+        uppers = 'ABCDEFGHIJKLMNOPQRSTUV'
+        nums = '123456789'
+        spec = '!@#$%^&*()~_+-='
+        lower_check = False
+        upper_check = False
+        num_check = False
+        special_check = False
+        for letter in newpass:
+            if letter in lowers:
+                lower_check = True
+        for letter in newpass:
+            if letter in uppers:
+                upper_check = True
+        for letter in newpass:
+            if letter in nums:
+                num_check = True
+        for letter in newpass:
+            if letter in spec:
+                special_check = True
+        print(newpass+ newpass2)
+        if newuser in users.keys():
+            self.ids.problem.text = 'that username is already in use'
+        elif newpass != newpass2:
+            self.ids.problem.text = 'new passwords must match'
+        elif len(newpass) < 8:
+            self.ids.problem.text = 'password must be at least 8 characters'
+        elif not lower_check:
+            self.ids.problem.text = 'password must contain a lowercase character'
+        elif not upper_check:
+            self.ids.problem.text = 'password must contain an uppercase character'
+        elif not num_check:
+            self.ids.problem.text = 'password must contain a number'
+        elif not special_check:
+            self.ids.problem.text = 'password must contain a special character'
+        if num_check == True and lower_check == True and upper_check == True and special_check == True and len(
+                newpass) >= 8 and newpass == newpass2:
+            self.ids.problem.color = 'green'
+            self.ids.problem.text = 'account successfully created'
+            users[newuser] = newpass
+            print(users)
+
+    def gologin(self):
+        self.manager.current = 'login'
+
 
 class LogoutScreen(Screen):
     def logout(self):
         self.manager.current = 'login'
 
-users = {'krazyman50': 'geometryDasher87!', 'belugawhale': 'OceanCreature87%'}
+
+users = {}
 LoginPage2App().run()
